@@ -13,296 +13,71 @@
   --border: rgba(255,255,255,0.07);
   --accent: #c8a96e;
   --accent2: #e8c990;
-  --visited: #c8a96e;
-  --unvisited: #2a2a3a;
-  --unvisited-stroke: #3a3a50;
+  --unvisited: #1e1e2e;
+  --unvisited-stroke: #3a3a55;
   --text: #f0ece4;
   --text-muted: rgba(240,236,228,0.45);
-  --text-soft: rgba(240,236,228,0.7);
-  --radius: 16px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
-/* HEADER */
-.header {
-  padding: 20px 20px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.header-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--accent2);
-  letter-spacing: 0.3px;
-}
-.header-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 3px;
-  font-weight: 300;
-}
-.stats-pill {
-  background: var(--surface2);
-  border: 0.5px solid var(--border);
-  border-radius: 20px;
-  padding: 6px 14px;
-  text-align: right;
-}
-.stats-num {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--accent);
-  line-height: 1;
-}
-.stats-lbl {
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
+.header { padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.header-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--accent2); }
+.header-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-weight: 300; }
+.stats-pill { background: var(--surface2); border: 0.5px solid var(--border); border-radius: 20px; padding: 6px 14px; text-align: right; }
+.stats-num { font-size: 18px; font-weight: 500; color: var(--accent); line-height: 1; }
+.stats-lbl { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
 
-/* MAP */
-.map-section {
-  padding: 16px 12px 8px;
-  position: relative;
-}
-.map-hint {
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  letter-spacing: 0.5px;
-}
-#turkey-map {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.il-path {
-  stroke: var(--bg);
-  stroke-width: 0.8;
-  cursor: pointer;
-  transition: opacity 0.2s, filter 0.2s;
-}
-.il-path.visited {
-  fill: var(--visited);
-}
-.il-path.visited:active {
-  opacity: 0.7;
-}
-.il-path.unvisited {
-  fill: var(--unvisited);
-  stroke: var(--unvisited-stroke);
-}
-.map-legend {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin-top: 8px;
-}
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--text-muted);
-}
-.legend-dot {
-  width: 10px; height: 10px;
-  border-radius: 2px;
-}
+.map-section { padding: 16px 8px 8px; }
+.map-hint { text-align: center; font-size: 11px; color: var(--text-muted); margin-bottom: 6px; letter-spacing: 0.5px; }
+#turkey-map { width: 100%; height: auto; display: block; }
 
-/* CITY LIST */
-.section-title {
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  padding: 16px 20px 8px;
-  text-transform: uppercase;
-}
-.city-list {
-  padding: 0 12px 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.city-card {
-  background: var(--surface);
-  border: 0.5px solid var(--border);
-  border-radius: 14px;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  cursor: pointer;
-  transition: background 0.15s;
-  -webkit-tap-highlight-color: transparent;
-}
+.il-alan { stroke-width: 0.6; cursor: default; transition: fill 0.25s; }
+.il-alan.gezilmedi { fill: var(--unvisited); stroke: var(--unvisited-stroke); }
+.il-alan.gezildi { fill: #8a6020; stroke: #c8a96e; stroke-width: 1; cursor: pointer; }
+.il-alan.gezildi:active { fill: var(--accent2); }
+
+.il-nokta { pointer-events: none; }
+.il-nokta.gezilmedi { fill: #3a3a58; }
+.il-nokta.gezildi { fill: var(--accent2); }
+
+.map-legend { display: flex; gap: 16px; justify-content: center; margin-top: 8px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+.section-title { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; padding: 16px 20px 8px; text-transform: uppercase; }
+.city-list { padding: 0 12px 100px; display: flex; flex-direction: column; gap: 8px; }
+.city-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .city-card:active { background: var(--surface2); }
-.city-icon {
-  width: 44px; height: 44px;
-  border-radius: 10px;
-  background: var(--surface2);
-  border: 0.5px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-}
-.city-info { flex: 1; min-width: 0; }
-.city-name {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-}
-.city-meta {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-.city-chevron {
-  color: var(--accent);
-  font-size: 18px;
-  opacity: 0.6;
-}
+.city-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--surface2); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.city-info { flex: 1; }
+.city-name { font-size: 15px; font-weight: 500; color: var(--text); }
+.city-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.city-chevron { color: var(--accent); font-size: 18px; opacity: 0.6; }
 
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  z-index: 100;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .modal-overlay.open { display: block; }
-.modal {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.modal-header {
-  position: sticky;
-  top: 0;
-  background: var(--bg);
-  border-bottom: 0.5px solid var(--border);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 10;
-}
-.modal-back {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: 0.5px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  color: var(--text);
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-.modal-city-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  color: var(--accent2);
-}
-.modal-photo-count {
-  margin-left: auto;
-  font-size: 12px;
-  color: var(--text-muted);
-}
+.modal { min-height: 100%; display: flex; flex-direction: column; }
+.modal-header { position: sticky; top: 0; background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 16px 20px; display: flex; align-items: center; gap: 14px; z-index: 10; }
+.modal-back { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; color: var(--text); flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
+.modal-city-name { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--accent2); }
+.modal-photo-count { margin-left: auto; font-size: 12px; color: var(--text-muted); }
 .modal-body { padding: 16px; flex: 1; }
-.photo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.photo-item {
-  border-radius: 10px;
-  overflow: hidden;
-  aspect-ratio: 1;
-  background: var(--surface2);
-  cursor: pointer;
-}
-.photo-item img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.2s;
-}
-.photo-item:first-child {
-  grid-column: span 2;
-  aspect-ratio: 16/9;
-}
-.drive-link-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 16px 0 0;
-  padding: 14px;
-  background: var(--surface);
-  border: 0.5px solid var(--accent);
-  border-radius: 12px;
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
 
-/* LIGHTBOX */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.96);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-}
+/* FOTOĞRAFLAR - TAM GÖRSEL, KIRPMA YOK */
+.photo-grid { display: flex; flex-direction: column; gap: 10px; }
+.photo-item { border-radius: 12px; overflow: hidden; background: var(--surface2); cursor: pointer; width: 100%; }
+.photo-item img { width: 100%; height: auto; display: block; object-fit: contain; }
+
+.drive-link-btn { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 0; padding: 14px; background: var(--surface); border: 0.5px solid var(--accent); border-radius: 12px; color: var(--accent); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.97); z-index: 200; align-items: center; justify-content: center; padding: 16px; }
 .lightbox.open { display: flex; }
-.lightbox img {
-  max-width: 100%;
-  max-height: 100vh;
-  object-fit: contain;
-}
-.lightbox-close {
-  position: fixed;
-  top: 16px; right: 16px;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-}
+.lightbox img { max-width: 100%; max-height: 100vh; object-fit: contain; border-radius: 8px; }
+.lightbox-close { position: fixed; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; cursor: pointer; }
 
-/* EMPTY STATE */
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-muted);
-  font-size: 14px;
-}
-
-/* NO VISITED */
-.no-visited {
-  text-align: center;
-  padding: 32px 20px;
-  color: var(--text-muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; }
+.no-visited { text-align: center; padding: 32px 20px; color: var(--text-muted); font-size: 13px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -320,26 +95,19 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 
 <div class="map-section">
   <div class="map-hint">Gezilen illere tıkla</div>
-  <svg id="turkey-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-    <!-- Türkiye illeri SVG - basitleştirilmiş -->
-    <g id="iller"></g>
+  <svg id="turkey-map" viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg">
+    <g id="il-alanlar"></g>
+    <g id="il-noktalar"></g>
   </svg>
   <div class="map-legend">
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--visited)"></div>
-      Gezdim
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--unvisited); border: 1px solid var(--unvisited-stroke)"></div>
-      Gitmedim
-    </div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8a6020;border:1px solid #c8a96e"></div>Gezdim</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--unvisited);border:1px solid #3a3a55"></div>Gitmedim</div>
   </div>
 </div>
 
 <div class="section-title">Gezilen İller</div>
 <div class="city-list" id="city-list"></div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
@@ -349,176 +117,174 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
     </div>
     <div class="modal-body">
       <div class="photo-grid" id="photo-grid"></div>
-      <a class="drive-link-btn" id="drive-link" href="#" target="_blank">
-        📁 Tüm fotoğrafları Drive'da gör
-      </a>
+      <a class="drive-link-btn" id="drive-link" href="#" target="_blank">📁 Tüm fotoğrafları Drive'da gör</a>
     </div>
   </div>
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <div class="lightbox-close">×</div>
   <img id="lightbox-img" src="" alt="">
 </div>
 
-<script>
-// =============================================
-// VERİ DOSYASI - data.js'den yüklenir
-// =============================================
-// data.js ayrı bir dosya olarak yüklenecek
-</script>
 <script src="data.js"></script>
 <script>
-// =============================================
-// TÜRKIYE SVG HARİTASI
-// =============================================
-// Basitleştirilmiş il koordinatları (merkez noktaları)
-const ilMerkezleri = {
-  "İstanbul":    {x:120, y:120}, "Tekirdağ":    {x:80,  y:130}, "Edirne":      {x:55,  y:105},
-  "Kırklareli":  {x:100, y:100}, "Çanakkale":   {x:90,  y:170}, "Balıkesir":   {x:135, y:190},
-  "İzmir":       {x:110, y:230}, "Manisa":      {x:140, y:215}, "Bursa":       {x:170, y:155},
-  "Kocaeli":     {x:185, y:130}, "Sakarya":     {x:210, y:130}, "Düzce":       {x:235, y:120},
-  "Bolu":        {x:260, y:125}, "Yalova":      {x:175, y:155}, "Bilecik":     {x:200, y:155},
-  "Eskişehir":   {x:235, y:175}, "Kütahya":     {x:190, y:195}, "Uşak":        {x:175, y:225},
-  "Denizli":     {x:175, y:265}, "Aydın":       {x:140, y:260}, "Muğla":       {x:155, y:295},
-  "Antalya":     {x:215, y:320}, "Isparta":     {x:210, y:280}, "Burdur":      {x:195, y:285},
-  "Afyonkarahisar":{x:210, y:230}, "Konya":     {x:270, y:275}, "Karaman":    {x:295, y:300},
-  "Ankara":      {x:295, y:185}, "Çankırı":     {x:310, y:155}, "Kastamonu":   {x:320, y:120},
-  "Bartın":      {x:295, y:108}, "Zonguldak":   {x:270, y:108}, "Karabük":     {x:300, y:120},
-  "Sinop":       {x:360, y:100}, "Samsun":      {x:415, y:105}, "Ordu":        {x:465, y:110},
-  "Giresun":     {x:498, y:115}, "Trabzon":     {x:540, y:108}, "Rize":        {x:575, y:105},
-  "Artvin":      {x:605, y:108}, "Ardahan":     {x:635, y:120}, "Kars":        {x:660, y:140},
-  "Ağrı":        {x:680, y:165}, "Iğdır":       {x:700, y:170}, "Van":         {x:675, y:210},
-  "Bitlis":      {x:645, y:215}, "Muş":         {x:620, y:205}, "Bingöl":      {x:580, y:195},
-  "Tunceli":     {x:560, y:190}, "Elazığ":      {x:555, y:205}, "Malatya":     {x:520, y:210},
-  "Erzurum":     {x:625, y:160}, "Erzincan":    {x:570, y:170}, "Bayburt":     {x:560, y:140},
-  "Gümüşhane":   {x:535, y:135}, "Trabzon":     {x:540, y:108},
-  "Sivas":       {x:480, y:190}, "Tokat":       {x:440, y:155}, "Amasya":      {x:400, y:140},
-  "Çorum":       {x:370, y:145}, "Yozgat":      {x:390, y:190}, "Kırşehir":    {x:345, y:205},
-  "Nevşehir":    {x:350, y:235}, "Kayseri":     {x:395, y:240}, "Niğde":       {x:360, y:265},
-  "Aksaray":     {x:320, y:255}, "Kırıkkale":   {x:325, y:175},
-  "Adana":       {x:365, y:320}, "Mersin":      {x:330, y:330}, "Osmaniye":    {x:390, y:315},
-  "Hatay":       {x:390, y:345}, "Kahramanmaraş":{x:430, y:295}, "Adıyaman":   {x:460, y:295},
-  "Gaziantep":   {x:435, y:330}, "Kilis":       {x:420, y:345}, "Şanlıurfa":   {x:480, y:335},
-  "Diyarbakır":  {x:545, y:275}, "Mardin":      {x:565, y:305}, "Siirt":       {x:610, y:275},
-  "Batman":      {x:585, y:270}, "Şırnak":      {x:630, y:285}, "Hakkari":     {x:670, y:250},
-  "Mus":         {x:620, y:200},
+
+// İl merkez koordinatları (viewBox 1000x460)
+const ILM = {
+  "Adana":{x:570,y:340},"Adıyaman":{x:655,y:318},"Afyonkarahisar":{x:268,y:252},
+  "Ağrı":{x:838,y:198},"Amasya":{x:528,y:162},"Ankara":{x:388,y:212},
+  "Antalya":{x:308,y:358},"Artvin":{x:778,y:118},"Aydın":{x:172,y:302},
+  "Balıkesir":{x:168,y:208},"Bilecik":{x:248,y:192},"Bingöl":{x:728,y:222},
+  "Bitlis":{x:778,y:248},"Bolu":{x:328,y:168},"Burdur":{x:268,y:322},
+  "Bursa":{x:212,y:188},"Çanakkale":{x:112,y:198},"Çankırı":{x:398,y:178},
+  "Çorum":{x:468,y:168},"Denizli":{x:222,y:308},"Diyarbakır":{x:708,y:292},
+  "Düzce":{x:302,y:158},"Edirne":{x:62,y:122},"Elazığ":{x:688,y:258},
+  "Erzincan":{x:692,y:208},"Erzurum":{x:762,y:188},"Eskişehir":{x:292,y:218},
+  "Gaziantep":{x:608,y:362},"Giresun":{x:638,y:138},"Gümüşhane":{x:692,y:158},
+  "Hakkari":{x:838,y:302},"Hatay":{x:588,y:392},"Iğdır":{x:878,y:202},
+  "Isparta":{x:268,y:332},"İçel":{x:438,y:378},"İstanbul":{x:152,y:148},
+  "İzmir":{x:142,y:262},"Kahramanmaraş":{x:592,y:318},"Karabük":{x:368,y:152},
+  "Karaman":{x:428,y:358},"Kars":{x:828,y:162},"Kastamonu":{x:412,y:142},
+  "Kayseri":{x:508,y:272},"Kırıkkale":{x:412,y:202},"Kırklareli":{x:118,y:108},
+  "Kırşehir":{x:452,y:238},"Kilis":{x:598,y:378},"Kocaeli":{x:238,y:158},
+  "Konya":{x:378,y:308},"Kütahya":{x:238,y:232},"Malatya":{x:638,y:258},
+  "Manisa":{x:172,y:248},"Mardin":{x:728,y:322},"Muğla":{x:208,y:348},
+  "Muş":{x:768,y:232},"Nevşehir":{x:462,y:272},"Niğde":{x:462,y:312},
+  "Ordu":{x:598,y:138},"Osmaniye":{x:582,y:362},"Rize":{x:742,y:122},
+  "Sakarya":{x:268,y:160},"Samsun":{x:528,y:130},"Siirt":{x:778,y:288},
+  "Sinop":{x:468,y:122},"Sivas":{x:578,y:222},"Şanlıurfa":{x:668,y:348},
+  "Şırnak":{x:808,y:312},"Tekirdağ":{x:102,y:148},"Tokat":{x:548,y:178},
+  "Trabzon":{x:698,y:130},"Tunceli":{x:698,y:232},"Uşak":{x:212,y:272},
+  "Van":{x:828,y:258},"Yalova":{x:218,y:170},"Yozgat":{x:488,y:218},
+  "Zonguldak":{x:338,y:142},"Ardahan":{x:798,y:138},"Bartın":{x:352,y:138},
+  "Batman":{x:748,y:298},"Bayburt":{x:728,y:162},
 };
 
-// SVG'ye yuvarlak il noktaları çiz
-function haritaCiz() {
-  const svg = document.getElementById('turkey-map');
-  const g = document.getElementById('iller');
-  
-  Object.entries(ilMerkezleri).forEach(([il, pos]) => {
-    const gezildi = DATA.iller[il] !== undefined;
-    
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', pos.x * 1.0);
-    circle.setAttribute('cy', pos.y * 1.0);
-    circle.setAttribute('r', gezildi ? 11 : 7);
-    circle.setAttribute('class', 'il-path ' + (gezildi ? 'visited' : 'unvisited'));
-    
-    if (gezildi) {
-      circle.style.cursor = 'pointer';
-      circle.addEventListener('click', () => sehirAc(il));
-    }
-    g.appendChild(circle);
+// Her il için poligon boyutu
+const BOYUT = {
+  "Konya":78,"Sivas":68,"Ankara":62,"İçel":60,"Erzurum":62,"Van":60,
+  "Şanlıurfa":64,"Kayseri":57,"Kastamonu":54,"Balıkesir":54,"Kahramanmaraş":52,
+  "Manisa":50,"Afyonkarahisar":52,"Malatya":50,"Diyarbakır":52,"İzmir":50,
+  "Antalya":58,"Konya":78,"default":38
+};
 
-    // İl adı (sadece gezilenlerde)
+function poligon(il, cx, cy) {
+  const r = BOYUT[il] || BOYUT["default"];
+  const pts = [
+    [cx,      cy-r],
+    [cx+r*.7, cy-r*.7],
+    [cx+r,    cy],
+    [cx+r*.7, cy+r*.7],
+    [cx,      cy+r],
+    [cx-r*.7, cy+r*.7],
+    [cx-r,    cy],
+    [cx-r*.7, cy-r*.7],
+  ];
+  return pts.map(p=>p.join(",")).join(" ");
+}
+
+function haritaCiz() {
+  const alanG = document.getElementById("il-alanlar");
+  const noktaG = document.getElementById("il-noktalar");
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Türkiye dış çizgisi
+  const sinir = document.createElementNS(NS, "path");
+  sinir.setAttribute("d", "M62,122 L88,105 L108,100 L132,98 L152,103 L168,112 L182,108 L198,100 L218,94 L242,91 L262,95 L278,103 L294,100 L312,94 L338,88 L362,85 L388,82 L412,80 L438,80 L462,78 L492,78 L518,80 L542,80 L562,79 L582,78 L602,78 L622,80 L642,80 L662,80 L682,79 L702,80 L720,83 L738,86 L755,89 L772,92 L788,96 L804,100 L820,102 L836,104 L852,106 L868,110 L882,116 L895,125 L902,135 L900,148 L894,158 L882,165 L868,168 L852,170 L840,178 L835,190 L838,200 L845,210 L852,220 L854,230 L850,240 L842,248 L830,254 L818,260 L810,270 L808,282 L812,295 L818,308 L815,320 L806,330 L792,334 L778,332 L764,326 L750,320 L736,318 L722,320 L712,330 L705,342 L700,355 L694,366 L684,374 L670,376 L656,372 L640,364 L625,358 L610,358 L596,363 L585,372 L574,383 L562,394 L550,402 L536,404 L522,398 L508,392 L494,386 L480,382 L465,382 L450,380 L435,378 L420,374 L405,368 L388,362 L372,358 L356,357 L340,358 L325,362 L312,360 L300,352 L290,340 L280,328 L268,315 L256,305 L242,298 L228,294 L212,294 L200,300 L190,310 L178,322 L166,332 L155,338 L144,336 L132,328 L120,315 L110,300 L100,284 L93,268 L89,252 L87,236 L84,220 L80,204 L74,188 L66,172 L62,155 L60,140 Z");
+  sinir.setAttribute("fill", "#181828");
+  sinir.setAttribute("stroke", "#c8a96e");
+  sinir.setAttribute("stroke-width", "1.8");
+  sinir.setAttribute("stroke-linejoin", "round");
+  alanG.appendChild(sinir);
+
+  Object.entries(ILM).forEach(([il, m]) => {
+    const gezildi = DATA.iller[il] !== undefined;
+    const cls = gezildi ? "gezildi" : "gezilmedi";
+
+    const poly = document.createElementNS(NS, "polygon");
+    poly.setAttribute("points", poligon(il, m.x, m.y));
+    poly.setAttribute("class", "il-alan " + cls);
+    if (gezildi) poly.addEventListener("click", () => sehirAc(il));
+    alanG.appendChild(poly);
+
+    const dot = document.createElementNS(NS, "circle");
+    dot.setAttribute("cx", m.x);
+    dot.setAttribute("cy", m.y);
+    dot.setAttribute("r", gezildi ? 5 : 2.5);
+    dot.setAttribute("class", "il-nokta " + cls);
+    noktaG.appendChild(dot);
+
     if (gezildi) {
-      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      text.setAttribute('x', pos.x);
-      text.setAttribute('y', pos.y + 22);
-      text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('font-size', '8');
-      text.setAttribute('fill', 'rgba(200,169,110,0.8)');
-      text.setAttribute('font-family', 'DM Sans, sans-serif');
-      text.textContent = il;
-      g.appendChild(text);
+      const txt = document.createElementNS(NS, "text");
+      txt.setAttribute("x", m.x);
+      txt.setAttribute("y", m.y + 16);
+      txt.setAttribute("text-anchor", "middle");
+      txt.setAttribute("font-size", "7.5");
+      txt.setAttribute("fill", "rgba(232,201,144,0.9)");
+      txt.setAttribute("font-family", "DM Sans, sans-serif");
+      txt.setAttribute("pointer-events", "none");
+      txt.textContent = il;
+      noktaG.appendChild(txt);
     }
   });
 }
 
-// =============================================
-// ŞEHIR LİSTESİ
-// =============================================
 function listeCiz() {
-  const container = document.getElementById('city-list');
+  const container = document.getElementById("city-list");
   const gezilen = Object.entries(DATA.iller);
-  
-  document.getElementById('visited-count').textContent = gezilen.length;
+  document.getElementById("visited-count").textContent = gezilen.length;
 
   if (gezilen.length === 0) {
-    container.innerHTML = '<div class="no-visited">Henüz gezilen il eklenmemiş.<br>data.js dosyasını düzenle.</div>';
+    container.innerHTML = '<div class="no-visited">Henüz gezilen il eklenmemiş.</div>';
     return;
   }
-
-  container.innerHTML = gezilen.map(([il, bilgi]) => `
+  container.innerHTML = gezilen.map(([il, b]) => `
     <div class="city-card" onclick="sehirAc('${il}')">
-      <div class="city-icon">${bilgi.emoji || '📍'}</div>
+      <div class="city-icon">${b.emoji||"📍"}</div>
       <div class="city-info">
         <div class="city-name">${il}</div>
-        <div class="city-meta">${bilgi.fotograflar.length} fotoğraf${bilgi.yil ? ' · ' + bilgi.yil : ''}</div>
+        <div class="city-meta">${b.fotograflar.length} fotoğraf${b.yil?" · "+b.yil:""}</div>
       </div>
       <div class="city-chevron">›</div>
     </div>
-  `).join('');
+  `).join("");
 }
 
-// =============================================
-// MODAL
-// =============================================
 function sehirAc(il) {
-  const bilgi = DATA.iller[il];
-  if (!bilgi) return;
+  const b = DATA.iller[il];
+  if (!b) return;
+  document.getElementById("modal-city-name").textContent = il;
+  document.getElementById("modal-photo-count").textContent = b.fotograflar.length + " fotoğraf";
+  const dl = document.getElementById("drive-link");
+  dl.href = b.drive_klasor || "#";
+  dl.style.display = b.drive_klasor ? "flex" : "none";
 
-  document.getElementById('modal-city-name').textContent = il;
-  document.getElementById('modal-photo-count').textContent = bilgi.fotograflar.length + ' fotoğraf';
-  
-  const driveLink = document.getElementById('drive-link');
-  if (bilgi.drive_klasor) {
-    driveLink.href = bilgi.drive_klasor;
-    driveLink.style.display = 'flex';
-  } else {
-    driveLink.style.display = 'none';
-  }
+  const grid = document.getElementById("photo-grid");
+  grid.innerHTML = b.fotograflar.length === 0
+    ? '<div class="empty-state">Fotoğraf eklenmemiş</div>'
+    : b.fotograflar.map((f,i) => `
+        <div class="photo-item" onclick="lightboxAc('${f.url}')">
+          <img src="${f.url}" alt="${il} ${i+1}" loading="lazy" onerror="this.style.opacity='0.1'">
+        </div>`).join("");
 
-  const grid = document.getElementById('photo-grid');
-  if (bilgi.fotograflar.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:span 2">Fotoğraf eklenmemiş</div>';
-  } else {
-    grid.innerHTML = bilgi.fotograflar.map((foto, i) => `
-      <div class="photo-item" onclick="lightboxAc('${foto.url}')">
-        <img src="${foto.url}" alt="${il} ${i+1}" loading="lazy" onerror="this.style.opacity='0.2'">
-      </div>
-    `).join('');
-  }
-
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
 }
 
-// =============================================
-// LIGHTBOX
-// =============================================
 function lightboxAc(url) {
-  document.getElementById('lightbox-img').src = url;
-  document.getElementById('lightbox').classList.add('open');
+  document.getElementById("lightbox-img").src = url;
+  document.getElementById("lightbox").classList.add("open");
 }
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById("lightbox").classList.remove("open");
 }
 
-// =============================================
-// BAŞLAT
-// =============================================
 haritaCiz();
 listeCiz();
 </script>
