@@ -7,7 +7,16 @@ const DATA = {
       drive_klasor: "",
       fotograflar: []
     },
-
+    
+    "Kuzey Kıbrıs": {
+      emoji: "🌊",
+      yil: "2024",
+      drive_klasor: "",
+      fotograflar: [
+        { url: "https://lh3.googleusercontent.com/d/1iIoft21fVly66M7MfSaF_iu8pUn-kgNE" },
+      ]
+    },
+    
     "Kayseri": {
       emoji: "🏔",
       yil: "2024",
