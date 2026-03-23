@@ -5,7 +5,12 @@
 
 const DATA = {
   iller: {
-
+"İstanbul": {
+  emoji: "🏙",
+  yil: "2024",
+  drive_klasor: "",
+  fotograflar: []
+},
     // ÖRNEK FORMAT - silip kendi illerini ekle:
     //
     // "İstanbul": {
