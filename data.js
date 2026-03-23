@@ -13,7 +13,7 @@ const DATA = {
       yil: "2024",
       drive_klasor: "",
       fotograflar: [
-        { url: "https://drive.google.com/uc?export=view&id=1iIoft21fVly66M7MfSaF_iu8pUn-kgNE" },
+        { url: "https://lh3.googleusercontent.com/d/1iIoft21fVly66M7MfSaF_iu8pUn-kgNE" },
       ]
     },
 
