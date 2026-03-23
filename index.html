@@ -89,6 +89,31 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
 
 .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; }
 .no-visited { text-align: center; padding: 32px 20px; color: var(--text-muted); font-size: 13px; line-height: 1.6; }
+
+/* GEZİ BLOKLARI */
+.gezi-blok { margin-bottom: 24px; }
+.gezi-blok:last-child { margin-bottom: 0; }
+.gezi-tarih {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.gezi-drive-btn {
+  font-size: 11px;
+  color: var(--accent);
+  opacity: 0.7;
+  text-decoration: none;
+  border: 0.5px solid rgba(200,169,110,0.3);
+  border-radius: 8px;
+  padding: 3px 8px;
+}
 </style>
 </head>
 <body>
@@ -382,10 +407,7 @@ html, body { background: var(--bg); color: var(--text); font-family: 'DM Sans', 
       <div class="modal-city-name" id="modal-city-name"></div>
       <div class="modal-photo-count" id="modal-photo-count"></div>
     </div>
-    <div class="modal-body">
-      <div class="photo-grid" id="photo-grid"></div>
-      <a class="drive-link-btn" id="drive-link" href="#" target="_blank">📁 Tüm fotoğrafları Drive'da gör</a>
-    </div>
+    <div class="modal-body" id="modal-body"></div>
   </div>
 </div>
 
@@ -486,7 +508,6 @@ const IL_ID_MAP = {
 // Haritayı başlat
 function haritaCiz() {
   Object.entries(DATA.iller).forEach(([iladi, bilgi]) => {
-    // ID'yi bul (ters arama)
     const gid = Object.entries(IL_ID_MAP).find(([id, ad]) => ad === iladi)?.[0];
     if (!gid) return;
     const el = document.getElementById(gid);
@@ -500,37 +521,58 @@ function listeCiz() {
   const container = document.getElementById("city-list");
   const gezilen = Object.entries(DATA.iller);
   document.getElementById("visited-count").textContent = gezilen.length;
+
   if (gezilen.length === 0) {
     container.innerHTML = '<div class="no-visited">Henüz gezilen il eklenmemiş.<br>data.js dosyasını düzenle.</div>';
     return;
   }
-  container.innerHTML = gezilen.map(([il, b]) => `
-    <div class="city-card" onclick="sehirAc('${il}')">
-      <div class="city-icon">${b.emoji || "📍"}</div>
-      <div class="city-info">
-        <div class="city-name">${il}</div>
-        <div class="city-meta">${b.fotograflar.length} fotoğraf${b.yil ? " · " + b.yil : ""}</div>
-      </div>
-      <div class="city-chevron">›</div>
-    </div>
-  `).join("");
+
+  // Toplam fotoğraf sayısı
+  container.innerHTML = gezilen.map(([il, b]) => {
+    const toplamFoto = b.geziler.reduce((acc, g) => acc + g.fotograflar.length, 0);
+    const sonGezi = b.geziler[b.geziler.length - 1];
+    return `
+      <div class="city-card" onclick="sehirAc('${il}')">
+        <div class="city-icon">${b.emoji || "📍"}</div>
+        <div class="city-info">
+          <div class="city-name">${il}</div>
+          <div class="city-meta">${b.geziler.length} gezi · ${toplamFoto} fotoğraf${sonGezi.tarih ? " · " + sonGezi.tarih : ""}</div>
+        </div>
+        <div class="city-chevron">›</div>
+      </div>`;
+  }).join("");
 }
 
 function sehirAc(il) {
   const b = DATA.iller[il];
   if (!b) return;
+
   document.getElementById("modal-city-name").textContent = il;
-  document.getElementById("modal-photo-count").textContent = b.fotograflar.length + " fotoğraf";
-  const dl = document.getElementById("drive-link");
-  dl.href = b.drive_klasor || "#";
-  dl.style.display = b.drive_klasor ? "flex" : "none";
-  const grid = document.getElementById("photo-grid");
-  grid.innerHTML = b.fotograflar.length === 0
-    ? '<div class="empty-state">Fotoğraf eklenmemiş</div>'
-    : b.fotograflar.map((f, i) => `
-        <div class="photo-item" onclick="lightboxAc('${f.url}')">
-          <img src="${f.url}" alt="${il} ${i + 1}" loading="lazy" onerror="this.style.opacity='0.1'">
-        </div>`).join("");
+
+  const toplamFoto = b.geziler.reduce((acc, g) => acc + g.fotograflar.length, 0);
+  document.getElementById("modal-photo-count").textContent =
+    b.geziler.length + " gezi · " + toplamFoto + " fotoğraf";
+
+  // Her gezi için blok oluştur
+  const body = document.getElementById("modal-body");
+  body.innerHTML = b.geziler.map(gezi => `
+    <div class="gezi-blok">
+      <div class="gezi-tarih">
+        <span>${gezi.tarih || "Tarih belirtilmemiş"}</span>
+        ${gezi.drive_klasor ? `<a class="gezi-drive-btn" href="${gezi.drive_klasor}" target="_blank">📁 Drive</a>` : ""}
+      </div>
+      <div class="photo-grid">
+        ${gezi.fotograflar.length === 0
+          ? '<div class="empty-state">Fotoğraf eklenmemiş</div>'
+          : gezi.fotograflar.map((f, i) => `
+              <div class="photo-item" onclick="lightboxAc('${f.url}')">
+                <img src="${f.url}" alt="${il} ${i+1}" loading="lazy" onerror="this.style.opacity='0.1'">
+              </div>`).join("")
+        }
+      </div>
+    </div>
+  `).join("");
+
   document.getElementById("modal").classList.add("open");
   document.body.style.overflow = "hidden";
 }
